@@ -7,15 +7,24 @@ public class BirdScript : MonoBehaviour
     public LogicScript logicScript;
     public bool isDead = false;
 
+    public float topScreen;
+    public float bottomScreen;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        float cameraHeight = Camera.main.orthographicSize;
+        topScreen = cameraHeight + 1;
+        bottomScreen = -cameraHeight - 1;
+
         logicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        offScreen();
+
         if (Input.GetKeyDown(KeyCode.Space) && !isDead)
         {
             myRigidbody.linearVelocity = Vector2.up * jumpForce;
@@ -26,6 +35,15 @@ public class BirdScript : MonoBehaviour
     {
         logicScript.gameOver();
         isDead = true;
+    }
+
+    private void offScreen()
+    {
+        if (transform.position.y > topScreen || transform.position.y < bottomScreen)
+        {
+            logicScript.gameOver();
+            isDead = true;
+        }
     }
     
 }
