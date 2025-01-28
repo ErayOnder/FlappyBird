@@ -9,6 +9,7 @@ public class BirdScript : MonoBehaviour
 
     public float topScreen;
     public float bottomScreen;
+    public AudioSource jumpSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +29,7 @@ public class BirdScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !isDead)
         {
             myRigidbody.linearVelocity = Vector2.up * jumpForce;
+            jumpSound.Play();
         }
     }
 
