@@ -9,7 +9,7 @@ public class LogicScript : MonoBehaviour
     public GameObject gameOverScreen;
     public AudioSource scoreSound;
     public AudioSource dieSound;
-
+    
     public void addScore(int score)
     {
         playerScore += score;
